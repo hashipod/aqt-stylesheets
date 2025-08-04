@@ -19,21 +19,21 @@
 // THE SOFTWARE.
 
 import QtQuick 2.3
-import QtQuick.Controls 1.2
+import QtQuick.Controls
 import QtQuick.Layouts 1.1
 
-import Aqt.StyleSheets 1.0
+import Aqt.StyleSheets
 
 ApplicationWindow {
     width: 500
     height: 410
 
     StyleEngine {
-       id: styleEngine
-       stylePath: "."
-       styleName: "style.css"
-       defaultStyleName: "default.css"
-       fileExtensions: [ "*.css" ]
+        id: styleEngine
+        stylePath: "."
+        styleName: "style.css"
+        defaultStyleName: "default.css"
+        fileExtensions: ["*.css"]
     }
 
     function stateColor(colors, isPressed, def) {

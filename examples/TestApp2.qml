@@ -19,7 +19,7 @@
 // THE SOFTWARE.
 
 import QtQuick 2.3
-import QtQuick.Controls 1.2
+import QtQuick.Controls
 import QtQuick.Layouts 1.1
 
 import Aqt.StyleSheets 1.2
@@ -30,8 +30,10 @@ ApplicationWindow {
 
     StyleEngine {
         id: styleEngine
-        styleSheetSource: "./style.css"
-        defaultStyleSheetSource: "./default.css"
+        stylePath: "."
+        styleName: "style.css"
+        defaultStyleName: "default.css"
+        fileExtensions: ["*.css"]
     }
 
     StylesDirWatcher {
@@ -67,7 +69,7 @@ ApplicationWindow {
 
             Rectangle {
                 StyleSet.name: "one color-mixin"
-                width: 245
+                width: 345
                 height: 200
                 color: stateColor(StyleSet.props.get("colors"), area1.pressed, "gray")
                 radius: StyleSet.props.number("radius")
@@ -146,8 +148,7 @@ ApplicationWindow {
     }
 
     function displayStyleName(styleUrl) {
-        var tokens = styleUrl.toString().split(/\/|\\/),
-            baseName = tokens[tokens.length - 1].split(/.css$/)[0]
+        var tokens = styleUrl.toString().split(/\/|\\/), baseName = tokens[tokens.length - 1].split(/.css$/)[0];
         return baseName.charAt(0).toUpperCase() + baseName.slice(1);
     }
 
@@ -173,8 +174,12 @@ ApplicationWindow {
                         onTriggered: styleEngine.styleSheetSource = styleSource
                     }
 
-                    onObjectAdded: changeStyleMenu.insertItem(index, object)
-                    onObjectRemoved: changeStyleMenu.removeItem(object)
+                    onObjectAdded: function(index, object) {
+                        changeStyleMenu.insertItem(index, object)
+                    }
+                    onObjectRemoved: function(index, object) {
+                        changeStyleMenu.removeItem(object)
+                    }
                 }
             }
         }
