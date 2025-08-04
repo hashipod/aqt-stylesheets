@@ -18,7 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.12)
 
 project(StyleSheets CXX)
 set(StyleSheets_VERSION_MAJOR 0)
@@ -61,6 +61,14 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL Clang
     -Wno-undefined-reinterpret-cast
     -Wno-documentation-deprecated-sync
     -Wno-weak-vtables
+    -Wno-poison-system-directories
+    -Wno-implicit-float-conversion
+    -Wno-deprecated-declarations
+    -Wno-switch-default
+    -Wno-ctad-maybe-unsupported
+    -Wno-documentation
+    -Wno-suggest-override
+    -Wno-missing-include-dirs
     )
 elseif(MSVC)
   set(warning_options /WX /W4 /wd4127 /wd4275 /wd4503 /wd4512 /wd4714)
